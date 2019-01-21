@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.7)
 project(cosmos)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -61,3 +61,5 @@ add_executable(cosmos
         type_name.hpp
         variadic2tuple.hpp
         Variant.hpp)
+
+add_executable(test_any test.cpp Any.hpp)
