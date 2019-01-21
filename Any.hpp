@@ -80,3 +80,7 @@ private:
 	BasePtr m_ptr;
 	std::type_index m_tpIndex;
 };
+
+// typeid
+// std::type_index
+// is_same
