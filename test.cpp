@@ -7,7 +7,9 @@
 using std::endl;
 using std::cout;
 
-// ----------------------------- test Any --------------------------------
+
+
+// ----------------------------- test Any begin --------------------------------
 namespace TAny {
     struct Base {
         Base() {
@@ -32,6 +34,11 @@ namespace TAny {
             move construction
             copy construction
             destruct
+            destruct
+            destruct
+            添加移动赋值后少了一次构造
+            construction
+            move construction
             destruct
             destruct
          */
@@ -59,14 +66,56 @@ namespace TAny {
         any = C();
         any.AnyCast<C>().Print();
 
+        // 转型错误
+        try {
+            any.AnyCast<A>();
+        } catch (std::exception e) {
+            cout << e.what() << endl;
+        }
+
     }
     void TestAny() {
         TestAny1();
         TestAny2();
     };
 }
-// ----------------------------- test Any --------------------------------
+// ----------------------------- test Any end --------------------------------
+
+
+
+// ----------------------------- test Aspect begin -----------------------------
+#include "Aspect.hpp"
+namespace TAspect {
+    struct LoggingAspect
+    {
+        void Before(int i)
+        {
+            std::cout <<"entering"<< std::endl;
+        }
+
+        void After(int i)
+        {
+            std::cout <<"leaving"<< std::endl;
+        }
+    };
+
+    void foo(int a)
+    {
+        cout <<"real HT function: "<<a<< endl;
+    }
+
+    int TestAspect()
+    {
+        Invoke<LoggingAspect>(&foo, 1); //织入方法
+        cout <<"-----------------------"<< endl;
+        Invoke<LoggingAspect>(&foo, 1);
+        return 0;
+    }
+}
+// ----------------------------- test Aspect end -----------------------------
+
 
 int main() {
     TAny::TestAny();
+    TAspect::TestAspect();
 }
