@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.7)
 project(cosmos)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 
 include_directories(.)
 include_directories(./object_pool)
@@ -62,4 +62,4 @@ add_executable(cosmos
         variadic2tuple.hpp
         Variant.hpp)
 
-add_executable(module_test test.cpp Any.hpp Aspect.hpp)
+add_executable(module_test test.cpp Any.hpp Aspect.hpp object_pool/SimpleObjectPool.hpp)

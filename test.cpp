@@ -115,7 +115,38 @@ namespace TAspect {
 // ----------------------------- test Aspect end -----------------------------
 
 
+// ----------------------------- test object pool begin-----------------------
+#include "object_pool/SimpleObjectPool.hpp"
+namespace TObjectPool {
+
+//test code
+    class A {};
+    void test_object_pool() {
+        SimpleObjectPool <A> p;
+        p.add(std::unique_ptr<A>(new A()));
+        p.add(std::unique_ptr<A>(new A()));
+        {
+            auto t = p.get();
+            p.get();
+            std::cout <<"size:"<<p.size() << std::endl;
+        }
+        std::cout <<"size:"<<p.size() << std::endl;
+        {
+            auto t1 = p.get();
+            auto t2 = p.get();
+            std::cout <<"size:"<<p.size() << std::endl;
+        }
+
+        std::cout << "size:"<<p.size() << std::endl;
+    }
+    void TestObjectPool() {
+        test_object_pool();
+    }
+}
+// ----------------------------- test object pool end-----------------------
+
 int main() {
     TAny::TestAny();
     TAspect::TestAspect();
+    TObjectPool::TestObjectPool();
 }
