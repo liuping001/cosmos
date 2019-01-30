@@ -90,12 +90,12 @@ namespace TAspect {
     {
         void Before(int i)
         {
-            std::cout <<"entering"<< std::endl;
+            std::cout <<"entering" << i << std::endl;
         }
 
         void After(int i)
         {
-            std::cout <<"leaving"<< std::endl;
+            std::cout <<"leaving"<< i <<std::endl;
         }
     };
 
@@ -107,8 +107,6 @@ namespace TAspect {
     int TestAspect()
     {
         Invoke<LoggingAspect>(&foo, 1); //织入方法
-        cout <<"-----------------------"<< endl;
-        Invoke<LoggingAspect>(&foo, 1);
         return 0;
     }
 }
@@ -144,6 +142,16 @@ namespace TObjectPool {
     }
 }
 // ----------------------------- test object pool end-----------------------
+
+
+// ----------------------------- test Bind begin -----------------------------
+// 这个bind作者只是展示了其关键实现，工程上还是得使用std::bind
+// ----------------------------- test Bind end  ------------------------------
+
+
+// ----------------------------- test function cache begin -------------------------
+
+// ----------------------------- test function cache end   -------------------------
 
 int main() {
     TAny::TestAny();

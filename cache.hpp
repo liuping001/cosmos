@@ -1,4 +1,7 @@
 
+// 你可以理解为是这样得一个map<函数地址,map<函数参数, 结果>>， 也就是这个样子map[func][argc] = func(argc),这个里面保存了函数得结果，
+// 通过func和argc组合获得结果
+
 template <typename R, typename... Args>
 std::function<R(Args...)> cache(R(*func) (Args...))
 {

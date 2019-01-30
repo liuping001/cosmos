@@ -1,3 +1,6 @@
+// 由于只是展示bind实现的关键技术，很多的实现细节并没有处理，比如参数是否是引用、右值、const volotile、绑定非静态的成员变量都还没处理，
+// 仅仅供学习之用，并非是重复发明轮子，只是展示bind是如何实现, 实际项目中还是使用c++11的std::bind为好。
+// https://www.cnblogs.com/qicosmos/p/3723388.html
 #pragma once
 #include <tuple>
 #include <type_traits>
@@ -117,8 +120,7 @@ std::forward_as_tuple(std::forward<CArgs>(args)...));
     template<typename ArgTuple, int... Indexes >
     result_type do_call(IndexTuple< Indexes... >& in, ArgTuple& argtp)
     {
-        return simple::invoke<result_type>(m_func, select(std::get<Indexes>(m_args), 
-argtp)...);
+        return simple::invoke<result_type>(m_func, select(std::get<Indexes>(m_args), argtp)...);
         //return m_func(select(std::get<Indexes>(m_args), argtp)...);
     }
 
