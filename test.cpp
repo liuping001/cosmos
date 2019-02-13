@@ -153,8 +153,25 @@ namespace TObjectPool {
 
 // ----------------------------- test function cache end   -------------------------
 
+// ----------------------------- test function range begin -------------------------
+#include "Range.hpp"
+namespace TRange {
+    template <class T> void Print (RangeImpl<T> range) {
+        for (auto item : range) {
+            cout << " " << item ;
+        }
+        cout << endl;
+    }
+    void TestRange() {
+        Print(Range(5));
+        Print(Range(5, 10));
+        Print(Range(5, 20, 3));
+    }
+}
+// ----------------------------- test function range end   -------------------------
 int main() {
     TAny::TestAny();
     TAspect::TestAspect();
     TObjectPool::TestObjectPool();
+    TRange::TestRange();
 }
